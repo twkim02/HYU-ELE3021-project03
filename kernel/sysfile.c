@@ -258,6 +258,8 @@ create(char *path, short type, short major, short minor)
     ilock(ip);
     if(type == T_FILE && (ip->type == T_FILE || ip->type == T_DEVICE))
       return ip;
+    if(type == T_SYMLINK && ip->type == T_SYMLINK)
+      return ip;
     iunlockput(ip);
     return 0;
   }
@@ -501,5 +503,22 @@ sys_pipe(void)
     fileclose(wf);
     return -1;
   }
+  return 0;
+}
+
+uint64
+sys_symlink(void)
+{
+  char target[MAXPATH];
+  char path[MAXPATH];
+
+  if (argstr(0, target, MAXPATH) < 0 || argstr(1, path, MAXPATH) < 0)
+    return -1;
+
+  begin_op(); // transaction start
+
+  // TODO
+
+  end_op();
   return 0;
 }
