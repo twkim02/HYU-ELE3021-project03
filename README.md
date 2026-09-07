@@ -1,32 +1,13 @@
-## Repository Naming Convention
+# xv6 파일시스템 확장
 
-```
-project03-XXXXXXXXXX
-```
+xv6-riscv 파일시스템에 **대용량 파일과 심볼릭 링크 지원**을 추가한 운영체제 프로젝트입니다.
 
-- **XXXXXXXXXX**: Student ID number
+**기술:** C · xv6-riscv · RISC-V
 
-### Example
+- **대용량 파일:** 이중 간접 블록을 도입해 파일당 최대 데이터 블록 수를 268개에서 65,803개로 확장
+- **심볼릭 링크:** `symlink()` 시스템콜과 `O_NOFOLLOW` 플래그를 추가하고, `open()`에서 링크 대상 경로를 추적하도록 구현
+- **순환 대응:** 링크 추적 깊이를 제한해 순환 참조로 인한 무한 탐색 방지
 
-- Student ID: 2025123456
+[블록 매핑 구현](kernel/fs.c) · [심볼릭 링크 구현](kernel/sysfile.c) · [설계 보고서](OS_project03_12754_2021052451.pdf)
 
-**Repository Name:**
-
-```
-project03-2025123456
-```
-
-Failure to follow this naming convention will result in a score of **0 (zero points)**.
-
----
-
-## Late Submissions
-
-Late submissions will be accepted with a **50% penalty** for **one day** only after the deadline. Late submissions must be sent via **email to the TAs**. Any submission after the extended one-day period will **NOT** be accepted and will receive a **score of 0**.
-
----
-
-If you have any questions, please contact the TA.
-
-- 성준모 (wnsah814@hanyang.ac.kr)
-- 허건 (hgun1207@hanyang.ac.kr)
+한양대학교 ELE3021 운영체제 수업 프로젝트
